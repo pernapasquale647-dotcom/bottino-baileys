@@ -9,8 +9,8 @@
   <img src="https://img.shields.io/npm/v/@bottino/baileys?style=for-the-badge&color=8a2be2&labelColor=2d1b69" alt="NPM Version">
   <img src="https://img.shields.io/npm/dm/@bottino/baileys?style=for-the-badge&color=8a2be2&labelColor=2d1b69" alt="NPM Downloads">
   <img src="https://img.shields.io/badge/License-MIT-8a2be2.svg?style=for-the-badge&labelColor=2d1b69" alt="MIT License">
-  <img src="https://img.shields.io/github/stars/bottino/bottino-baileys?style=for-the-badge&color=8a2be2&labelColor=2d1b69" alt="GitHub Stars">
-  <img src="https://img.shields.io/github/forks/bottino/bottino-baileys?style=for-the-badge&color=8a2be2&labelColor=2d1b69" alt="GitHub Forks">
+  <img src="https://img.shields.io/github/stars/pernapasquale647-dotcom/bottino-baileys?style=for-the-badge&color=8a2be2&labelColor=2d1b69" alt="GitHub Stars">
+  <img src="https://img.shields.io/github/forks/pernapasquale647-dotcom/bottino-baileys?style=for-the-badge&color=8a2be2&labelColor=2d1b69" alt="GitHub Forks">
 </p>
 <p align="center">
   <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=20&duration=4000&pause=2500&color=8A2BE2&center=true&vCenter=true&width=800&lines=💜+A+modern%2C+powerful+and+fast+WhatsApp+Web+API+library;🔄+With+support+for+LID%2FJID+and+multi-device;">
