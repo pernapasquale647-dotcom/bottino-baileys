@@ -3,7 +3,7 @@
 ![Wave](https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=24&height=150&section=header&text=Bottino&fontSize=60&fontColor=ffffff&animation=fadeIn&fontAlignY=35)
 <img src="https://i.gifer.com/YdBN.gif" width="200">
 
-![Retro](https://readme-typing-svg.herokuapp.com?font=VT323&size=24&duration=2500&pause=10000&color=8A2BE2&center=true&vCenter=true&width=250&height=25&lines=$+by+Bottino)
+![Retro](https://readme-typing-svg.herokuapp.com?font=VT323&size=24&duration=2500&pause=10000&color=8A2BE2&center=true&vCenter=true&width=250&height=25&lines=$+by+Paki)
 <br>
 <p align="center">
   <img src="https://img.shields.io/npm/v/@bottino/baileys?style=for-the-badge&color=8a2be2&labelColor=2d1b69" alt="NPM Version">
