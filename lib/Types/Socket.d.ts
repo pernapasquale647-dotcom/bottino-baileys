@@ -131,6 +131,15 @@ export type SocketConfig = {
     messagesSendRate?: number;
     /** Adds a random delay to message sending to simulate human behavior. Defaults to true. Set to false for faster sending, but this may increase the risk of getting blocked. */
     humanizeMessages?: boolean;
+    /** Anti-ban options to reduce the risk of getting the number banned */
+    antiBan?: {
+        /** Sends a typing indicator before sending a message. Defaults to true. */
+        typingIndicator?: boolean;
+        /** Minimum random delay in ms before sending. Defaults to 800. */
+        minDelayMs?: number;
+        /** Maximum random delay in ms before sending. Defaults to 2500. */
+        maxDelayMs?: number;
+    };
     /** If true, fakes business metadata (actual_actors, host_storage, privacy_mode_ts) to render buttons on some clients, at the risk of higher ban rates and banner spam. Defaults to false. */
     fakedBizTags?: boolean;
 };

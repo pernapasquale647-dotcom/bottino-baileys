@@ -42,6 +42,10 @@ La libreria ufficiale del progetto Bottino, basata su Baileys con miglioramenti 
       <h3>⚡ Performance</h3>
       <p>• Intelligent reconnection<br>• Advanced TTL cache<br>• Performance monitoring</p>
     </td>
+    <td align="center" width="25%">
+      <h3>🛡️ Anti-Ban</h3>
+      <p>• Rate limit automatico<br>• Ritardi umani casuali<br>• Indicatore di digitazione</p>
+    </td>
   </tr>
 </table>
 
@@ -114,18 +118,32 @@ async function startBot() {
 startBot().catch(console.error);
 ```
 
-### Configurazione consigliata per evitare ban
+### 🛡️ Anti-Ban integrato
+
+La libreria include un sistema anti-ban attivo di default che protegge il numero:
+- **Rate limit**: massimo 1 messaggio al secondo per chat (`messagesSendRate`, default `1`).
+- **Umanizzazione**: ritardo casuale tra `800` e `2500ms` prima di ogni invio (`humanizeMessages`, default `true`).
+- **Indicatore di digitazione**: invia lo stato "sta scrivendo…" prima di rispondere (`antiBan.typingIndicator`, default `true`).
 
 ```typescript
 const sock = makeWASocket({
     auth: state,
     printQRInTerminal: true,
     logger: console,
-    browser: ['YourBotName', 'Chrome', '4.0.0'],
-    markOnlineOnConnect: false, // Evita di apparire sempre online, riduce il rischio di ban
-    syncFullHistory: false      // Evita di sincronizzare dati inutili
+    markOnlineOnConnect: false,
+    syncFullHistory: false,
+    // 🛡️ Anti-ban configurabile
+    messagesSendRate: 1,                    // msg/sec (default 1)
+    humanizeMessages: true,                  // ritardi umani on/off
+    antiBan: {
+        typingIndicator: true,               // "sta scrivendo…" prima della risposta
+        minDelayMs: 800,                     // ritardo minimo in ms
+        maxDelayMs: 2500,                    // ritardo massimo in ms
+    },
 });
 ```
+
+> ⚠️ **Attenzione:** aumentando `messagesSendRate` o disattivando `humanizeMessages`/`typingIndicator` il bot risponde più veloce, ma aumenta il rischio di ban. Disattiva l'anti-ban solo se sei sicuro.
 
 ### Collegare il dispositivo
 
