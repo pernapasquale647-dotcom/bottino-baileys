@@ -46,6 +46,10 @@ La libreria ufficiale del progetto Bottino, basata su Baileys con miglioramenti 
       <h3>🛡️ Anti-Ban</h3>
       <p>• Rate limit automatico<br>• Ritardi umani casuali<br>• Indicatore di digitazione</p>
     </td>
+    <td align="center" width="25%">
+      <h3>🕐 Anti-Attesa</h3>
+      <p>• Retry nativo dei messaggi<br>• Cache messaggi recenti<br>• Niente "in attesa del messaggio"</p>
+    </td>
   </tr>
 </table>
 
@@ -144,6 +148,49 @@ const sock = makeWASocket({
 ```
 
 > ⚠️ **Attenzione:** aumentando `messagesSendRate` o disattivando `humanizeMessages`/`typingIndicator` il bot risponde più veloce, ma aumenta il rischio di ban. Disattiva l'anti-ban solo se sei sicuro.
+
+### 🕐 Anti-Attesa integrato
+
+Evita il messaggio **"⏳ in attesa del messaggio"** quando WhatsApp non riceve il contenuto di un invio. La libreria salva gli ultimi messaggi inviati e risponde da sola alle richieste di re-invio del server (receipt `type: retry`) usando la funzione nativa `sendMessagesAgain`.
+
+**Come attivarlo:**
+
+```typescript
+const sock = makeWASocket({
+    auth: state,
+    printQRInTerminal: true,
+    logger: console,
+    // 🕐 Anti-Attesa
+    enableRecentMessageCache: true,   // abilita la cache dei messaggi recenti + retry nativo
+    getMessage: async (key) => {
+        // (facoltativo) contenuto del messaggio con key.id se non è in cache.
+        // Deve restituire il campo message, es.:
+        //   { conversation: "testo" }
+        //   { extendedTextMessage: { text: "testo" } }
+        return undefined;
+    },
+});
+```
+
+**Come funziona:**
+- `enableRecentMessageCache: true` — mantiene in memoria gli ultimi messaggi inviati, così la lib può rispondere da sola alle richieste di re-invio.
+- `getMessage(key)` — se WhatsApp chiede un messaggio non più in cache, la lib lo richiede qui. Se restituisci il contenuto, il retry funziona comunque.
+- Quando un messaggio resta nello stato `PENDING`, il retry avviene **automaticamente** senza duplicati (stesso `messageId`).
+
+**Chiamare manualmente `sendMessagesAgain`:**
+
+La funzione è esposta sul socket. Re-invia il messaggio **originale** con lo stesso `messageId` (idempotente):
+
+```typescript
+await sock.sendMessagesAgain(
+    { remoteJid: jid, fromMe: true, id: messageId }, // key
+    [messageId],                                      // ids da reinviare
+    undefined,                                        // retryNode (opzionale)
+    undefined                                         // receiptNode (opzionale)
+);
+```
+
+> 💡 **Suggerimento:** combina Anti-Attesa con Anti-Ban — i messaggi bloccati vengono re-inviati in automatico rispettando il rate limit.
 
 ### Collegare il dispositivo
 
